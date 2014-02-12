@@ -1,0 +1,90 @@
+#include "ui/menudef.h"
+#include "ui_mp/common_macro.inc"
+#define 	OPTIONS_STYLE			1
+#include "ui_mp/menustyle.inc"
+#include "ui/choices_setup_common.menu"
+
+{
+	menuDef 
+	{
+		name			"shoutcast_setup"
+		fullScreen		0
+		rect			0 0 640 480
+		focusColor		COLOR_FOCUSED
+		soundloop		""
+		onOpen
+		{
+			scriptMenuResponse "getdetails";
+			close shoutcast_setup_binds;
+
+			setLocalVarBool ui_hideBack 1;
+		}
+		onClose
+		{
+			setLocalVarBool ui_hideBack 0;
+		}
+		onESC 
+		{ 
+			close self;		
+		}
+
+		blurWorld		1.0
+
+		PREPROC_SHADER_DRAW( -120 0 880 480, 0 0, "white", 0 0 0 0.75, 0, 1, 0 0 0 0 )
+
+		#undef BACK_OPEN
+		#define BACK_OPEN;
+		#include "ui_mp/navcontrols.inc"
+		CHOICE_MENU_TITLE( "Shoutcast Setup" )
+
+		#undef CHOICE_X_START
+		#define CHOICE_X_START		-247
+		#undef CHOICE_Y_START
+		#define CHOICE_Y_START		31
+
+		#undef CHOICE_HORIZONTAL_ALIGN
+		#define CHOICE_HORIZONTAL_ALIGN HORIZONTAL_ALIGN_CENTER
+
+		#undef CHOICE_VERTICAL_ALIGN
+		#define CHOICE_VERTICAL_ALIGN VERTICAL_ALIGN_TOP
+
+#define CHOICE_SHOUTCAST_PLAYER( itemIndex, player ) \
+CHOICE_DBUTTON_VIS( itemIndex, player+". No Player", when (dvarString("shout_name"+player)=="" ) ) \
+CHOICE_DBUTTON_VIS( itemIndex, player+". "+dvarString("shout_name"+player) + " (" + dvarString("shout_class"+player) + ")" , when (dvarString("shout_name"+player)!="" && dvarint("shout_health"+player)==0) ) \
+CHOICE_BUTTON_VIS( itemIndex, player+". "+dvarString("shout_name"+player) + " (" + dvarString("shout_class"+player) + ")" , scriptMenuResponse "shoutcast_setup "+player;, when (dvarint("shout_health"+player)!=0 && dvarString("shout_name"+player)!="" ) ) 
+
+		CHOICE_SECTION_TITLE( 1, dVarString( shout_attack_name ) )
+		CHOICE_SHOUTCAST_PLAYER(2, 0)
+		CHOICE_SHOUTCAST_PLAYER(3, 1)
+		CHOICE_SHOUTCAST_PLAYER(4, 2)
+		CHOICE_SHOUTCAST_PLAYER(5, 3)
+		CHOICE_SHOUTCAST_PLAYER(6, 4)
+		CHOICE_SECTION_TITLE( 7, dVarString( shout_defence_name ) )
+		CHOICE_SHOUTCAST_PLAYER(8, 5)
+		CHOICE_SHOUTCAST_PLAYER(9, 6)
+		CHOICE_SHOUTCAST_PLAYER(10, 7)
+		CHOICE_SHOUTCAST_PLAYER(11, 8)
+		CHOICE_SHOUTCAST_PLAYER(12, 9)
+
+		CHOICE_BUTTON( 14, "Players...", close shoutcast_setup; open shoutcast_setup; )
+		CHOICE_BUTTON( 15, "Binds...", close shoutcast_setup; open shoutcast_setup_binds; )
+
+		#undef	CHOICE_SIZE_X
+		#define CHOICE_SIZE_X		180
+
+		#undef  SECTION_X_OFFSET
+		#define SECTION_X_OFFSET 	-30
+		#undef CHOICE_X_START
+		#define CHOICE_X_START		-200
+	
+		CHOICE_SECTION_TITLE( 21, "Class" )
+		CHOICE_BUTTON_VIS( 22, "Cycle Assault Players", scriptMenuResponse "assault", when( dvarint(shout_class_assault) != 0 ) ) 
+		CHOICE_DBUTTON_VIS( 22, "Cycle Assault Players", when( dvarint(shout_class_assault) == 0 ) )
+		CHOICE_BUTTON_VIS( 23, "Cycle Specops Players", scriptMenuResponse "specops", when( dvarint(shout_class_specops) != 0 ) ) 
+		CHOICE_DBUTTON_VIS( 23, "Cycle Specops Players", when( dvarint(shout_class_specops) == 0 ) )
+		CHOICE_BUTTON_VIS( 24, "Cycle Demolitions Players", scriptMenuResponse "demolitions", when( dvarint(shout_class_demolitions) !=  ) ) 
+		CHOICE_DBUTTON_VIS(24, "Cycle Demolitions Players", when( dvarint(shout_class_demolitions) == 0  ))
+		CHOICE_BUTTON_VIS( 25, "Cycle Sniper Players", scriptMenuResponse "sniper", when( dvarint(shout_class_sniper) != 0 ) ) 
+		CHOICE_DBUTTON_VIS(25, "Cycle Sniper Players", when( dvarint(shout_class_sniper) == 0 ))
+	}
+}

@@ -1,0 +1,108 @@
+#include "ui/menudef.h"
+#include "ui_mp/common_macro.inc"
+
+#define CHOICE_X_START			0
+#define CHOICE_Y_START			192
+
+#define CHOICE_GROUP			"main"
+#define CHOICE_SEP_1			1
+#define CHOICE_SEP_2			3
+#define CHOICE_SEP_3			7
+
+#define STYLE_PC	1
+#include "ui_mp/menustyle.inc"
+#include "ui/choices_setup_common.menu"
+#include "ui_mp/stats_info.inc"
+
+{
+	menuDef
+	{
+		name			"main"
+		fullScreen		1
+		rect			0 0 640 480
+		focusColor		COLOR_FOCUSED
+		onOpen
+		{ 
+			open main_text;
+			uiScript addPlayerProfiles;
+			uiScript openMenuOnDvar com_playerProfile "" player_profile;
+			uiScript openMenuOnDvarNot ui_playerProfileCount 1 player_profile;
+			uiScript stopRefresh;
+			setdvar ui_showEndOfGame "0";
+			setdvar sv_cheats "1";
+			setdvar promod_mode "strat";
+		}
+		onClose
+		{
+		}
+		onESC 
+		{
+		}
+	}
+	
+	menuDef
+	{
+		name			"main_text"
+		fullScreen		1
+		rect			0 0 640 480
+		focusColor		COLOR_FOCUSED
+		onOpen
+		{
+		}
+		onClose
+		{
+		}
+		onESC 
+		{
+		}
+
+		// Menu items -------------------------------------------
+		#include "ui/bg.inc"
+
+		// cod:mw logo
+		itemDef
+		{
+			visible			1
+			rect			324 56 278 68
+			forecolor		1 1 1 1
+			style			WINDOW_STYLE_SHADER
+			background		"logo_cod2"
+			visible 		when( !localvarBool( ui_hideBack ) && dvarString( ui_mod_logo ) == "" );
+			decoration
+		}
+
+		#define CLEARUIHINT	exec "set ui_hint_text @MP_NULL"
+	
+		CHOICE_BUTTON_FOCUS_VIS( 1, "About Promod", ;, open auconfirm;, close auconfirm;, when( !localvarBool( ui_hideBack ) ) )
+		CHOICE_SEPARATOR_VIS( CHOICE_SEP_1, when( !localvarBool( ui_hideBack ) ) )
+		CHOICE_BUTTON_VIS( 2, "Join Game", open pc_join_unranked;, when( !localvarBool( ui_hideBack ) ) )
+		CHOICE_BUTTON_VIS( 3, "Start New Server", close self; open createserver;, when( !localvarBool( ui_hideBack ) ) )
+
+		CHOICE_SEPARATOR_VIS( CHOICE_SEP_2, when( !localvarBool( ui_hideBack ) ) )
+
+		CHOICE_BUTTON_VIS( 4, "Select Profile", setdvar ui_playerProfileAlreadyChosen 0; open player_profile;, when( !localvarBool( ui_hideBack ) ) )
+		CHOICE_BUTTON_VIS( 5, "Controls", open main_controls;, when( !localvarBool( ui_hideBack ) ) )
+		CHOICE_BUTTON_VIS( 6, "Options", open main_options;, when( !localvarBool( ui_hideBack ) ) )
+		CHOICE_BUTTON_VIS( 7, "Mods", close self; open mods_menu;, when( !localvarBool( ui_hideBack ) ) )
+		CHOICE_SEPARATOR_VIS( CHOICE_SEP_3, when( !localvarBool( ui_hideBack ) ) )
+		CHOICE_BUTTON_VIS( 8, "Quit", open quit_popmenu;, when( !localvarBool( ui_hideBack ) ) )
+	}
+	
+	#include "ui_mp/popupstyle.inc"	
+	#include "ui/choices_setup_popmenu.menu"
+
+
+	// ====================== join server type selection =========================
+	
+	#undef CHOICE_SIZE_X
+	#define CHOICE_SIZE_X	200
+	
+	menuDef
+	{
+		IMPROVED_POPUP_SETUP( "join_game_popup", 4, 12, 112, ;, 1 )
+		//CHOICE_BUTTON( 1, "Ranked Games", close self; close "main_text"; open pc_join_ranked )
+		CHOICE_BUTTON( 3, "Ranked Games", close self; close "main_text"; open pc_join_unranked )
+		CHOICE_BUTTON( 4, "Unranked Games", close self; close "main_text"; open pc_join_unranked )
+		//CHOICE_BUTTON( 3, "@MENU_CANCEL", close self )
+	}
+}

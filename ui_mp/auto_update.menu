@@ -1,0 +1,139 @@
+#include "ui/menudef.h"
+
+{
+	// CREATE AUTO-UPDATE CONFIRMATION POPUP MENU \\
+	menuDef 
+	{
+		name	"auconfirm"
+		fullscreen 0
+		rect 219 170 211 95
+		focusColor COLOR_FOCUSED
+		style 1
+		border 1
+
+		itemDef 
+		{
+			name "acwindow"
+			group grpControlbutton
+			rect 0 2 211 95
+			style WINDOW_STYLE_FILLED
+			border 1
+			bordercolor .5 .5 .5 .5
+			forecolor 1 1 1 1
+			backcolor 0 0 0 .85
+			visible 1
+			decoration
+		}
+		
+		itemDef 
+		{
+			name "name"
+			text "Call of Duty 4 Promod" 
+			style 0
+			textscale .3 
+			textstyle 3
+			rect 0 20 211 20
+			textalign ITEM_ALIGN_CENTER
+			textfont UI_FONT_NORMAL
+			decoration
+			forecolor 1 1 1 1
+			visible 1
+		}
+		
+		//Website
+		itemDef 
+		{
+			name "link"
+			text "www.codpromod.com" 
+			style 0
+			textscale .20
+			textstyle 3
+			rect 0 28 211 20
+			textalign ITEM_ALIGN_CENTER
+			textfont UI_FONT_NORMAL
+			decoration
+			forecolor 1 1 1 1
+			visible 1
+		}
+
+		// Current version display
+		itemDef 
+		{
+			name "currentvers"
+			text "Current Promod Version: LIVE V2.14 EU" 
+			style 0
+			textscale .25 
+			textstyle 3
+			rect 20 45 211 20
+			textalign ITEM_ALIGN_LEFT
+			textfont UI_FONT_NORMAL
+			decoration
+			forecolor 1 1 1 1
+			visible 1
+		}
+		
+		// Developers
+		itemDef 
+		{
+			name "developers"
+			text "Developers: Trivve and Ingram" 
+			style 0
+			textscale .25 
+			textstyle 3
+			rect 20 55 211 20
+			textalign ITEM_ALIGN_LEFT
+			textfont UI_FONT_NORMAL
+			decoration
+			forecolor 1 1 1 1
+			visible 1
+		}
+		
+		// Manager
+		itemDef 
+		{
+			name "manager"
+			text "Manager: abhi" 
+			style 0
+			textscale .25 
+			textstyle 3
+			rect 20 65 211 20
+			textalign ITEM_ALIGN_LEFT
+			textfont UI_FONT_NORMAL
+			decoration
+			forecolor 1 1 1 1
+			visible 1
+		}
+		
+		// Former developers
+		itemDef 
+		{
+			name "fdevelopers"
+			text "Former developers: raf1, MavLP, bulletworm" 
+			style 0
+			textscale .25 
+			textstyle 3
+			rect 20 75 211 20
+			textalign ITEM_ALIGN_LEFT
+			textfont UI_FONT_NORMAL
+			decoration
+			forecolor 1 1 1 1
+			visible 1
+		}
+
+		// spec thanks
+		itemDef 
+		{
+			name "thanks"
+			text "Also thanks to everyone else involved in Promod!" 
+			style 0
+			textscale .25 
+			textstyle 3
+			rect 0 93 211 20
+			textalign ITEM_ALIGN_CENTER
+			textfont UI_FONT_NORMAL
+			decoration
+			forecolor 1 1 1 1
+			visible 1
+		}
+	}
+}

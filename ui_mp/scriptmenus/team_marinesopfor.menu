@@ -1,0 +1,156 @@
+#include "ui/menudef.h"
+#include "ui_mp/common_macro.inc"
+
+#define CHOICE_SIZE_X			150
+#define CHOICE_SIZE_Y			22
+
+#define CHOICE_X_START			0
+#define CHOICE_Y_START			204//180
+
+#define CHOICE_SEP_OFFSET_Y		-2
+
+#define CHOICE_SEP_1			3
+
+#include "ui_mp/menustyle.inc"
+#include "ui_mp/choices_setup_teams.menu"
+
+{
+	menuDef
+	{
+		name			"team_marinesopfor"
+		rect			0 0 640 480
+		focuscolor		COLOR_FOCUSED
+		style			WINDOW_STYLE_EMPTY
+		blurWorld		7.0
+		legacySplitScreenScale
+		onEsc
+		{
+			close self;
+		}
+		onOpen
+		{
+			setfocus "auto_assign";
+		}
+
+		// background overlay
+		itemDef	{
+			style			WINDOW_STYLE_FILLED
+			rect			0 0 640 480 HORIZONTAL_ALIGN_FULLSCREEN VERTICAL_ALIGN_FULLSCREEN
+			backcolor		0 0 0 0.75 //0 0.05 0.15 0.5
+			visible			1
+			decoration
+		}
+		// gradient_top
+		itemDef	{
+			style			WINDOW_STYLE_SHADER
+			rect			0 0 854 75 HORIZONTAL_ALIGN_FULLSCREEN 0
+			background		"gradient_top"
+			visible			1
+			decoration
+		}
+		// gradient_bottom
+		itemDef	{
+			style			WINDOW_STYLE_SHADER
+			rect			0 405 854 75 HORIZONTAL_ALIGN_FULLSCREEN 0
+			background		"gradient_bottom"
+			visible			1
+			decoration
+		}
+
+		CHOICE_MENU_TITLE( "@MPUI_CHOOSE_TEAM" )
+
+#define ORIGIN_DIY_TITLE			55 72
+#define ORIGIN_DIY_FRAME			48 72
+#define ORIGIN_DIY					50 92
+
+		itemDef 
+		{
+			style			WINDOW_STYLE_FILLED
+			rect			ORIGIN_DIY_FRAME 285 115
+			backcolor		0 0 0 .5
+			visible			when ( dvarstring("ui_motd") != "" )
+			decoration
+		}
+		itemDef
+		{
+			rect			ORIGIN_DIY 270 120
+			type			ITEM_TYPE_BUTTON
+			textfont		UI_FONT_DEFAULT
+			dvar			"ui_motd"
+			textalign 		ITEM_ALIGN_LEFT
+			textscale		TEXTSIZE_SMALL
+			forecolor		1 1 1 1
+			backcolor		0 0 0 0
+			textalignx 		0
+			textaligny 		-10   
+			origin			5 10
+			visible			when ( dvarstring("ui_motd") != "" )
+			decoration
+			autowrapped
+		}
+		itemDef
+		{
+			type			ITEM_TYPE_TEXT
+			visible			when ( dvarstring("ui_motd") != "" )
+			origin			ORIGIN_DIY_TITLE
+			forecolor		1 0.8 0.4 1
+			text			"Message of the Day"
+			textfont		UI_FONT_DEFAULT
+			textscale		TEXTSIZE_DEFAULT
+			decoration
+		}
+
+		itemDef
+		{
+			
+			style			WINDOW_STYLE_SHADER
+			rect			ORIGIN_DIY_FRAME 283 113
+			background		"white"
+			forecolor		.5 .5 .5 0.15
+			border			1
+			bordersize		0.75
+			bordercolor		0.5 0.5 0.5 0.7
+			visible			when ( dvarstring("ui_motd") != "" )
+			decoration
+		}
+
+		#include "ui_mp/tactical_map.inc";		
+
+		#define BACK_OPEN;
+		#include "ui_mp/navcontrols.inc"
+
+		#include "ui_mp/teamicon.inc"
+
+		#ifdef PC
+			#undef  CHOICE_X_START
+			#define CHOICE_X_START	-320
+			
+			#undef	CHOICE_HORIZONTAL_ALIGN
+			#define CHOICE_HORIZONTAL_ALIGN HORIZONTAL_ALIGN_CENTER
+		#endif
+
+		CHOICE_HIGHLIGHT( 1, 1 )
+		CHOICE_BUTTON_VIS_NOHI( 1, "1. Attack", play "mouse_click"; scriptMenuResponse "allies";, when( team( name ) != "TEAM_ALLIES" ) )	
+		CHOICE_DBUTTON_VIS_NOHI( 1, "1. Attack",  when( team( name ) == "TEAM_ALLIES" ) )	
+
+		CHOICE_HIGHLIGHT( 2, 1 )
+		CHOICE_BUTTON_VIS_NOHI( 2, "2. Defence", play "mouse_click"; scriptMenuResponse "axis";, when( team( name ) != "TEAM_AXIS" ) )
+		CHOICE_DBUTTON_VIS_NOHI( 2, "2. Defence", when( team( name ) == "TEAM_AXIS" ) )
+
+		CHOICE_HIGHLIGHT( 3, 1 )
+		CHOICE_BUTTON_VIS_NOHI( 3, "3. Auto-Assign", play "mouse_click"; scriptMenuResponse "autoassign";, 1 )
+
+		CHOICE_HIGHLIGHT( 4, 1 )
+		CHOICE_BUTTON_VIS_NOHI( 4, "4. Shoutcaster", play "mouse_click"; scriptMenuResponse "shoutcast";, when( team( name ) != "TEAM_SPECTATOR" ) )
+		CHOICE_DBUTTON_VIS_NOHI( 4, "4. Shoutcaster", when( team( name ) == "TEAM_SPECTATOR" ) )
+
+		CHOICE_HIGHLIGHT( 5, when( team( name ) == "TEAM_FREE" ) )
+		CHOICE_BUTTON_VIS_NOHI( 5, "@MPUI_LEAVE_GAME", open popup_endgame, when( team( name ) == "TEAM_FREE" ) )
+
+		execKey "1" { scriptMenuResponse "allies"}
+		execKey "2" { scriptMenuResponse "axis"}
+		execKey "3" { scriptMenuResponse "autoassign"}
+		execKey "4" { scriptMenuResponse "shoutcast"}
+
+	}
+}

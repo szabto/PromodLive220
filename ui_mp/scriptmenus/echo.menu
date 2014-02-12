@@ -1,0 +1,10 @@
+#include "ui/menudef.h"
+{
+	menuDef 
+	{
+		name "echo"
+		rect 0 0 1 1
+		visible 0
+		fullscreen 0
+	}
+}
