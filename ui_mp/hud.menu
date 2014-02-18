@@ -15,10 +15,10 @@
 #define	BOTTOM_RECT_X 0
 #define	BOTTOM_RECT_Y 0
 
-#define COLOR_RED 0.9 0.55 0.55 1
-#define COLOR_GREEN 0.45 0.65 0.48 1
-#define COLOR_BLUE 0.8 1 1 1
-#define COLOR_YELLOW 0.97 0.97 0.7 1
+#define COLOR_RED 1 0.71 0.71 1
+#define COLOR_GREEN 0.71 1 0.71 1
+#define COLOR_BLUE 0.71 1 1 1
+#define COLOR_YELLOW 1 1 0.71 1
 
 #define MINIMAP_ORIGIN 2 11
 {
@@ -234,7 +234,9 @@
 	}
 
 	#define JOINED (team( name ) != "TEAM_FREE")
+	#define NOT_JOINED (team( name ) == "TEAM_FREE")
 	#define TEAMBASED (dvarstring(g_gametype) != "dm")
+	#define GAMETYPE (dvarstring(g_gametype))
 	
 	///////////////////////////////////////////////////////////////////////////////
 	///// Plays looping ak47 sound when a dvar doesn't has the expected value /////
@@ -451,7 +453,7 @@
 			exp				rect H( 64 - (PLAYER_IS_LOSING*128) );
 			forecolor		1 1 1 HUD_ALPHA
 			background		"scorebar_backdrop"
-			visible			when( !JOINED && SHOULD_DISPLAY_SCOREBAR )
+			visible			when( NOT_JOINED && SHOULD_DISPLAY_SCOREBAR )
 			decoration
 		}
 		itemDef
