@@ -73,19 +73,19 @@
 
 		CHOICE_HIGHLIGHT( 1, 1 )
 		CHOICE_BUTTON_VIS_NOHI( 1, "1. Assault", scriptMenuResponse "assault";, when( dvarBool( allies_allow_assault ) || dvarString( loadout_curclass ) == "assault" ) )
-		CHOICE_DBUTTON_VIS_NOHI( 1, "1. Assault (0)", when( !dvarBool( allies_allow_assault ) && dvarString( loadout_curclass ) != "assault" ) )
+		CHOICE_DBUTTON_VIS_NOHI( 1, "1. Assault", when( !dvarBool( allies_allow_assault ) && dvarString( loadout_curclass ) != "assault" ) )
 
 		CHOICE_HIGHLIGHT( 2, 1 )
 		CHOICE_BUTTON_VIS_NOHI( 2, "2. Spec Ops", scriptMenuResponse "specops";, when( dvarBool( allies_allow_specops ) || dvarString( loadout_curclass ) == "specops" ) )
-		CHOICE_DBUTTON_VIS_NOHI( 2, "2. Spec Ops (0)", when( !dvarBool( allies_allow_specops ) && dvarString( loadout_curclass ) != "specops" ) )
+		CHOICE_DBUTTON_VIS_NOHI( 2, "2. Spec Ops", when( !dvarBool( allies_allow_specops ) && dvarString( loadout_curclass ) != "specops" ) )
 
 		CHOICE_HIGHLIGHT( 3, 1 )
 		CHOICE_BUTTON_VIS_NOHI( 3, "3. Demolitions", scriptMenuResponse "demolitions";, when( dvarBool( allies_allow_demolitions ) || dvarString( loadout_curclass ) == "demolitions" ) )
-		CHOICE_DBUTTON_VIS_NOHI( 3, "3. Demolitions (0)", when( !dvarBool( allies_allow_demolitions ) && dvarString( loadout_curclass ) != "demolitions" ) )
+		CHOICE_DBUTTON_VIS_NOHI( 3, "3. Demolitions", when( !dvarBool( allies_allow_demolitions ) && dvarString( loadout_curclass ) != "demolitions" ) )
 
 		CHOICE_HIGHLIGHT( 4, 1 )
 		CHOICE_BUTTON_VIS_NOHI( 4, "4. Sniper", scriptMenuResponse "sniper";, when( dvarBool( allies_allow_sniper ) || dvarString( loadout_curclass ) == "sniper" ) )
-		CHOICE_DBUTTON_VIS_NOHI( 4, "4. Sniper (0)", when( !dvarBool( allies_allow_sniper ) && dvarString( loadout_curclass ) != "sniper" ) )
+		CHOICE_DBUTTON_VIS_NOHI( 4, "4. Sniper", when( !dvarBool( allies_allow_sniper ) && dvarString( loadout_curclass ) != "sniper" ) )
 
 		CHOICE_HIGHLIGHT( 6, 1 )		
 		CHOICE_BUTTON_VIS_NOHI( 6, "5. Spectate Team", scriptMenuResponse "killspec";, 1 )
