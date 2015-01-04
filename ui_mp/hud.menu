@@ -978,7 +978,7 @@
 		rect		FULLSCREEN_WIDE
 		background	"$levelBriefing"
 		backcolor	1 1 1 1
-		visible 	when (!inkillcam() && ((CHEATS && (FPS || MAXPACKETS || DLIGHT || RLOAD || RLOD || RATE || DYNENT || HICONH || HICONW || HICONSCOPE || HICONOFF || HDAMITIME || VSMOOTH || FINVERT || SME || NOPREDICT || COMPLEQU || COMFREQU || DEVELOPER || FEATHER || AUTOMELEE)) || (team(name) == "TEAM_FREE" && GAMETYPE != "dm")) )
+		visible 	when (((CHEATS && (FPS || MAXPACKETS || DLIGHT || RLOAD || RLOD || RATE || DYNENT || HICONH || HICONW || HICONSCOPE || HICONOFF || HDAMITIME || VSMOOTH || FINVERT || SME || NOPREDICT || COMPLEQU || COMFREQU || DEVELOPER || FEATHER || AUTOMELEE)) || (team(name) == "TEAM_FREE" && GAMETYPE != "dm")) )
 
 		//Fps check 40-250
 		WARNING_MESSAGE(1, "SET COM_MAXFPS WITHIN 40-250", FPS )
