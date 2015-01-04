@@ -60,7 +60,7 @@
 		itemDef 
 		{
 			name "currentvers"
-			text "Current Promod Version: LIVE V2.18 EU" 
+			text "Current Promod Version: LIVE V2.20 EU" 
 			style 0
 			textscale .25 
 			textstyle 3
@@ -112,8 +112,8 @@
 			style 0
 			textscale .25 
 			textstyle 3
-			rect 20 75 211 20
-			textalign ITEM_ALIGN_LEFT
+			rect 0 75 211 20
+			textalign ITEM_ALIGN_CENTER
 			textfont UI_FONT_NORMAL
 			decoration
 			forecolor 1 1 1 1
