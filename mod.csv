@@ -104,3 +104,4 @@ rawfile,promod/timeout.gsc
 rawfile,shock/damage_mp.shock
 sound,promod,,all_mp
 stringtable,promod/customStatsTable.csv
+stringtable,promod/destructible.csv
