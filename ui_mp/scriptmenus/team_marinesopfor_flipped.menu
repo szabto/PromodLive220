@@ -59,6 +59,61 @@
 
 		CHOICE_MENU_TITLE( "@MPUI_CHOOSE_TEAM" )
 
+#define ORIGIN_DIY_TITLE			55 72
+#define ORIGIN_DIY_FRAME			48 72
+#define ORIGIN_DIY					50 92
+
+		itemDef 
+		{
+			style			WINDOW_STYLE_FILLED
+			rect			ORIGIN_DIY_FRAME 285 115
+			backcolor		0 0 0 .5
+			visible			when ( dvarstring("ui_motd") != "" )
+			decoration
+		}
+		itemDef
+		{
+			rect			ORIGIN_DIY 270 120
+			type			ITEM_TYPE_BUTTON
+			textfont		UI_FONT_DEFAULT
+			dvar			"ui_motd"
+			textalign 		ITEM_ALIGN_LEFT
+			textscale		TEXTSIZE_SMALL
+			forecolor		1 1 1 1
+			backcolor		0 0 0 0
+			textalignx 		0
+			textaligny 		-10   
+			origin			5 10
+			visible			when ( dvarstring("ui_motd") != "" )
+			decoration
+			autowrapped
+		}
+		itemDef
+		{
+			type			ITEM_TYPE_TEXT
+			visible			when ( dvarstring("ui_motd") != "" )
+			origin			ORIGIN_DIY_TITLE
+			forecolor		1 0.8 0.4 1
+			text			"Message of the Day"
+			textfont		UI_FONT_DEFAULT
+			textscale		TEXTSIZE_DEFAULT
+			decoration
+		}
+
+		itemDef
+		{
+			
+			style			WINDOW_STYLE_SHADER
+			rect			ORIGIN_DIY_FRAME 283 113
+			background		"white"
+			forecolor		.5 .5 .5 0.15
+			border			1
+			bordersize		0.75
+			bordercolor		0.5 0.5 0.5 0.7
+			visible			when ( dvarstring("ui_motd") != "" )
+			decoration
+		}
+
 		#include "ui_mp/tactical_map.inc";		
 
 		#define BACK_OPEN;
